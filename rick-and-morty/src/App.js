@@ -32,7 +32,6 @@ class App extends React.Component {
   }
 
   handleNameChange(event) {
-    // console.log(event.target.value)
     this.setState({
       name: event.target.value
     })
