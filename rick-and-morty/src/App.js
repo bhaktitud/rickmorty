@@ -6,8 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import Navbar from './components/Navbar'
@@ -15,9 +14,6 @@ import Details from './components/Details';
 import Home from './components/Home';
 
 class App extends React.Component {
-  constructor () {
-    super();
-  }
 
   render () {
     return (
@@ -26,7 +22,7 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <Route path="/" exact component={Home}></Route>
-            <Route path="/details" component={Details}></Route>
+            <Route path="/details/:id" component={Details}></Route>
           </Switch>
         </>
       </Router>

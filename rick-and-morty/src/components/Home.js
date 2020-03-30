@@ -3,14 +3,13 @@ import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Card, Button, CardDeck, CardGroup, Row, Col } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   constructor () {
     super();
     this.state = {
-      name : '',
       characters: []
     }
   }
@@ -28,49 +27,30 @@ class Home extends React.Component {
     }).catch((err) => {
       console.log(err)
     });
-  }
 
-  handleNameChange(event) {
-    this.setState({
-      name: event.target.value
-    })
-  }
-
-  handleFormSubmit(event) {
-    event.preventDefault();
-
-    const { name, characters } = this.state
-
-    const id = characters.length + 1
-    const newChar = { id, name }
-
-    this.setState({
-      characters: characters.concat(newChar)
-    })
+    // const fetchCharacters = async () => {
+        // const fetchCharacters = await fetch(
+        //     'https://rickandmortyapi.com/api/character/'
+        // );
+        // const characters =  await fetchCharacters.json();
+    // };
   }
 
   render () {
-    const { characters, name } = this.state
+    const { characters } = this.state
     return (
         <>
-          <div className="container-fluid custom-spacing">
-            <Row className="justify-content-md-center" md={6}>
+          <div className="container custom-spacing">
+            <Row className="justify-content-md-center row-cards" md={3}>
               {characters.map((character) => (
                 <Col key={character.id}>
                   <Card className="custom-card" border="secondary" style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={character.image} />
-                    <Card.Body>
-                      <Card.Title>{character.name}</Card.Title>
-                      <ul>
-                        <li>{character.status}</li>
-                        <li>{character.species}</li>
-                        <li>{character.gender}</li>
-                        <li>{character.origin.name}</li>
-                      </ul>
-                        <Link to='/details'>
-                           <Button variant="primary">Details</Button>
-                        </Link>
-                      </Card.Body>
+                    <Link to={`/details/${character.id}`}>
+                        <img className="card-img" src={character.image} alt="Bologna"></img>
+                        <div className="card-img-overlay text-white d-flex flex-column justify-content-center">
+                            <h4 className="card-title">{character.name}</h4>
+                        </div>
+                    </Link>
                   </Card>
                 </Col>
               ))}
