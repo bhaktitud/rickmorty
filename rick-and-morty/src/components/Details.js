@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Details({ match }) {
   const [ characterProfile, setCharacterProfile ] = useState({})
+  const [ characterLocation, setCharacterLocation ] = useState({})
+  const [ characterOrigin, setCharacterOrigin ] = useState({})
 
   useEffect(() => {
     axios({
@@ -12,8 +14,10 @@ function Details({ match }) {
         url: `https://rickandmortyapi.com/api/character/${match.params.id}`
     })
         .then(({ data }) => {
-            console.log(data.location.name)
+            console.log(data)
             setCharacterProfile(data)
+            setCharacterLocation(data.location)
+            setCharacterOrigin(data.origin)
         }).catch((err) => {
             console.log(err)
         });
@@ -21,33 +25,21 @@ function Details({ match }) {
 
   return (
     <>
-      <div className="character-image">
-        <img className="character-profile-img" src={characterProfile.image} alt="img"></img>
-        <div className="character-profile-name" border="secondary">
-            <h2 className="character-profile-name-text"> - {characterProfile.name} -</h2>
-        </div>
-      </div>
-
       <div className="detail-container">
-        <div className="profile-detail">
-            <div>
-                <p>{characterProfile.status} </p>
-            </div>
-            <div>
-                <p>{characterProfile.gender}</p>
-            </div>
-            <div>
-                <p>{characterProfile.species}</p>
-            </div>
+        <div class="profile-img-container">
+          <img class="character-profile-img" src={characterProfile.image} alt="character's image"></img>
         </div>
-      
-        <div className="mutual-residents">
-          <div>
-              <p>Mutual Residents</p>
-          </div>
+        <div class="details-content-left">
+          <h3 class="character-profile-name-text"> {characterProfile.name} </h3>
+          <ul class="detail-list">
+            <li> <p> <strong> Status : {characterProfile.status} </strong> </p> </li>
+            <li> <p> <strong> Gender : {characterProfile.gender} </strong> </p></li>
+            <li> <p> <strong> Species : {characterProfile.species} </strong> </p></li>
+            <li> <p> <strong> Location : {characterLocation.name} </strong> </p></li>
+            <li> <p> <strong> Origin : {characterOrigin.name} </strong> </p></li>
+          </ul>
         </div>
       </div>
-
     </>
   )
 

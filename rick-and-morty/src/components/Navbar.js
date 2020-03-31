@@ -2,23 +2,18 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Navbar, Nav, Form, FormControl, Button, } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 
 function NavTopBar() {
   return (
     <>
-        <Navbar className="navbar" bg="light" expand="lg">
-        <Navbar.Brand href="">Rick & Morty</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-        </Nav>
-            <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-success">Search</Button>
-            </Form>
-            </Navbar.Collapse>
-        </Navbar>
+      <nav className="border border-secondary fixed navtopbar">
+        <div className="nav-brand">
+          <img className="poster animated infinite pulse delay-2s" src="rickmortyposter.png"></img>
+        </div>
+        <div className="collapsible">
+        </div>
+      </nav>
     </>
   )
 }

@@ -13,23 +13,18 @@ import Navbar from './components/Navbar'
 import Details from './components/Details';
 import Home from './components/Home';
 
-class App extends React.Component {
 
-  render () {
-    return (
-      <Router>
-        <>
-          <Navbar />
-          <Switch>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/details/:id" component={Details}></Route>
-          </Switch>
-        </>
-      </Router>
-      )
-  
-  }
-  
+function App() {
+  return (
+    <Router>
+      <>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/details/:id" component={Details}></Route>
+        </Switch>
+      </>
+    </Router>
+    )
 }
-
 export default App;
