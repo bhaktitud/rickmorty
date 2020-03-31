@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import useFetchDetails from '../customHooks/getDetails';
@@ -12,7 +12,7 @@ function Details({ match }) {
     <>
       <div className="detail-container">
         <div className="profile-img-container">
-          <img className="character-profile-img" src={characterProfile.image} alt="character's image"></img>
+          <img className="character-profile-img" src={characterProfile.image} alt="character"></img>
         </div>
         <div className="details-content-left">
           <h3 className="character-profile-name-text"> {characterProfile.name} </h3>
@@ -31,7 +31,9 @@ function Details({ match }) {
           </div>
           <div className="mutual-chars-container">
             {mutualChars.map((char) => (
-              <img key={char.data.id} className="mutual-chars-img" src={char.data.image} alt="mutual characters"></img>
+              <Link to={`/details/${char.data.id}`}>
+                <img key={char.data.id} className="mutual-chars-img" src={char.data.image} alt="mutual characters"></img>
+              </Link>
             ))}
           </div>
         </div>
@@ -39,6 +41,5 @@ function Details({ match }) {
   )
 
 }
-
 
 export default Details;

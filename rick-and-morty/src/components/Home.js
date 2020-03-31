@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,9 +21,7 @@ function Home() {
             background="transparent"
             speed = "1"
             style = {
-              { width: "50px" }, 
-              { height: "50px" },
-              { margin: "1% 1% 1% 1%" }
+              { width: "50px", height: "50px", margin: "1% 1% 1% 1%"  }
             }
             loop
             autoplay >
@@ -55,7 +52,7 @@ function Home() {
               <div className="image-area">
                 <div className="img-wrapper">
                   <Link to={`/details/${character.id}`}>
-                        <img src={character.image} alt="card image" />
+                        <img src={character.image} alt="card" />
                         <h2>{character.name}</h2>
                     </Link>
                     </div>

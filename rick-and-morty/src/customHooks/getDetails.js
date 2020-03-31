@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function useFetchDetails(url) {
@@ -12,7 +12,6 @@ export default function useFetchDetails(url) {
             url: url
         })
             .then(({ data }) => {
-                // console.log(data.location.url)
                 setCharacterProfile(data)
                 if(data.location.url !== ""){
                   return Promise.all([axios.get(data.location.url)])
@@ -36,7 +35,7 @@ export default function useFetchDetails(url) {
             .catch((err) => {
                 console.log(err, 'malah error')
             });
-      }, [])
+      }, [url])
 
       return { characterProfile, mutualChars }
 }
