@@ -2,44 +2,39 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import useFetchDetails from '../customHooks/getDetails';
 
 function Details({ match }) {
-  const [ characterProfile, setCharacterProfile ] = useState({})
-  const [ characterLocation, setCharacterLocation ] = useState({})
-  const [ characterOrigin, setCharacterOrigin ] = useState({})
 
-  useEffect(() => {
-    axios({
-        method: 'GET',
-        url: `https://rickandmortyapi.com/api/character/${match.params.id}`
-    })
-        .then(({ data }) => {
-            console.log(data)
-            setCharacterProfile(data)
-            setCharacterLocation(data.location)
-            setCharacterOrigin(data.origin)
-        }).catch((err) => {
-            console.log(err)
-        });
-  }, [])
+  const { characterProfile, mutualChars } = useFetchDetails(`https://rickandmortyapi.com/api/character/${match.params.id}`)
 
   return (
     <>
       <div className="detail-container">
-        <div class="profile-img-container">
-          <img class="character-profile-img" src={characterProfile.image} alt="character's image"></img>
+        <div className="profile-img-container">
+          <img className="character-profile-img" src={characterProfile.image} alt="character's image"></img>
         </div>
-        <div class="details-content-left">
-          <h3 class="character-profile-name-text"> {characterProfile.name} </h3>
-          <ul class="detail-list">
+        <div className="details-content-left">
+          <h3 className="character-profile-name-text"> {characterProfile.name} </h3>
+          <ul className="detail-list">
             <li> <p> <strong> Status : {characterProfile.status} </strong> </p> </li>
-            <li> <p> <strong> Gender : {characterProfile.gender} </strong> </p></li>
-            <li> <p> <strong> Species : {characterProfile.species} </strong> </p></li>
-            <li> <p> <strong> Location : {characterLocation.name} </strong> </p></li>
-            <li> <p> <strong> Origin : {characterOrigin.name} </strong> </p></li>
+            <li> <p> <strong> Gender : {characterProfile.gender} </strong> </p> </li>
+            <li> <p> <strong> Species : {characterProfile.species} </strong> </p> </li>
+            <li> <p> <strong> Location : {characterProfile.location.name} </strong> </p> </li>
+            <li> <p> <strong> Origin : {characterProfile.origin.name} </strong> </p> </li>
           </ul>
         </div>
-      </div>
+        </div>
+        <div className="mutual-container">
+          <div>
+            <h5 className="character-profile-name-text custom-font-h5">Characters Who Live in the Same Location</h5>
+          </div>
+          <div className="mutual-chars-container">
+            {mutualChars.map((char) => (
+              <img key={char.data.id} className="mutual-chars-img" src={char.data.image} alt="mutual characters"></img>
+            ))}
+          </div>
+        </div>
     </>
   )
 

@@ -15,9 +15,6 @@ export default function useFetcher(url) {
         .then(({ data }) => {
           const { results } = data
           setCharacters(results);
-          // results.filter(chars => {
-          //   chars.name.toLowerCase().includes(name)
-          // })
         }).catch((err) => {
           console.log(err)
           setError(err);
