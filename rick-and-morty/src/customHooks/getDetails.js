@@ -14,28 +14,27 @@ export default function useFetchDetails(url) {
         })
             .then(({ data }) => {
                 setCharacterProfile(data)
+                console.log(data.location)
                 if(data.location.url !== ""){
                   return Promise.all([axios.get(data.location.url)])
-                } else {
-                  return data
+                  // return axios.get(data.location.url)
                 }
             })
-            .then(([ data ]) => {
+            .then(( [data] ) => {
+              console.log(data)
               const { residents } = data.data
-              // console.log(residents, 'dari promise all')
               residents.forEach(element => {
                   arrayPromises.push(axios.get(element))          
               });
               return Promise.all(arrayPromises)
             })
             .then(( data ) => {
-              // console.log(data, 'dari then ke 2')
               setMutualChars(data)
             })
             .catch((err) => {
                 console.log(err, 'malah error')
             });
-      }, [url, arrayPromises])
+      }, [])
 
       return { characterProfile, mutualChars }
 }

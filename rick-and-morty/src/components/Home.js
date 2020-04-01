@@ -18,11 +18,9 @@ function Home() {
   const handleOnChange = event => {
     event.preventDefault();
     setName(event.target.value)
-    console.log(event.target.value)
   }
 
   useEffect(() => {
-    // console.log(characters, 'dari filter')
     const results = characters.filter(character => 
       character.name.toLowerCase().includes(name.toLowerCase())
     )
@@ -51,7 +49,10 @@ function Home() {
     <div className="custom-minitopbar">
       <div>
         <form>
-          <input type="text" placeholder="Filter char's name ..." value={name} onChange={handleOnChange} />
+          <div>
+            <img className="filter-image" src="https://png2.cleanpng.com/sh/0564d28b649a076fef94b1b47fc722ae/L0KzQYm3VsI1N6p1i5H0aYP2gLBuTgJqa5wyi9N3Y3join70jCJ1gV54hdt9aD3ngrLAif5oNZJzgd9qdHXnPbfwjP0ua5J3ReRyY3uwg7L1gBhmgl46eqRvZUPmc4jsgBY5PV83TaYBOUi6RIK8Usk5PmY2TqYAMUm3PsH1h5==/kisspng-rick-sanchez-morty-smith-drawing-animated-film-car-rick-sanchez-5b2fe3cc7ecf85.2546987415298651645194.png" alt="morty"></img>
+          </div>
+          <input className="filter-type" type="text" placeholder="Filter char's name ..." value={name} onChange={handleOnChange} />
         </form>
       </div>
     </div>

@@ -35,7 +35,7 @@ function Details({ match }) {
             <h5 className="character-profile-name-text custom-font-h5">Characters Who Live in the Same Location</h5>
           </div>
           <div className="mutual-chars-container">
-            {mutualChars.map((char) => (
+            {mutualChars && mutualChars.map((char) => (
               <img key={char.data.id} className="mutual-chars-img" src={char.data.image} alt="mutual characters" onClick={() => handleClick(char.data.id)}></img>
             ))}
           </div>
