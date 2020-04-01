@@ -10,6 +10,7 @@ function addFav(state = [], action ) {
                 ...state,
                 action.character
             ]
+            // return state.concat(action.character)
         default:
             return state;
     }

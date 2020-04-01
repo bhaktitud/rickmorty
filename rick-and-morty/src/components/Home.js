@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
+import useFetcher from '../customHooks/useFetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
-import useFetcher from '../customHooks/useFetch';
-
 import { addFavourite } from '../actions';
 import { connect } from 'react-redux';
+
+import FavouriteList from '../components/FavouriteList'
+
 
 function Home({ dispatch }) {
 
@@ -24,7 +23,6 @@ function Home({ dispatch }) {
   }
 
   function handleOnFavourite(favCharacter) {
-    // console.log('masuk favourite')
     dispatch(addFavourite(favCharacter))
   }
 
@@ -53,7 +51,6 @@ function Home({ dispatch }) {
 
   return (
     <>
-    console.log(filtered)
     <div className="custom-minitopbar">
       <div>
         <form>
@@ -64,6 +61,7 @@ function Home({ dispatch }) {
         </form>
       </div>
     </div>
+    <FavouriteList></FavouriteList>
       <div className="container custom-spacing">
         <Row className="justify-content-md-center row-cards" md={3}>
           {filtered.map((character) => (
