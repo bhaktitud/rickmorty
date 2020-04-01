@@ -24,7 +24,7 @@ function Home() {
   useEffect(() => {
     // console.log(characters, 'dari filter')
     const results = characters.filter(character => 
-      character.name.toLowerCase().includes(name)
+      character.name.toLowerCase().includes(name.toLowerCase())
     )
     setFiltered(results)
   }, [characters, name]);
@@ -51,8 +51,7 @@ function Home() {
     <div className="custom-minitopbar">
       <div>
         <form>
-          <input type="text" placeholder="type char's name ..." value={name} onChange={handleOnChange} />
-          <p>Main Characters</p>
+          <input type="text" placeholder="Filter char's name ..." value={name} onChange={handleOnChange} />
         </form>
       </div>
     </div>
