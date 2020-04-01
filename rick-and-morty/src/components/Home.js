@@ -5,9 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import useFetcher from '../customHooks/useFetch'
+import useFetcher from '../customHooks/useFetch';
 
-function Home() {
+import { addFavourite } from '../actions';
+import { connect } from 'react-redux';
+
+function Home({ dispatch }) {
 
   const [ name, setName ] = useState("")
   const [ filtered, setFiltered ] = useState([])
@@ -18,6 +21,11 @@ function Home() {
   const handleOnChange = event => {
     event.preventDefault();
     setName(event.target.value)
+  }
+
+  function handleOnFavourite(favCharacter) {
+    // console.log('masuk favourite')
+    dispatch(addFavourite(favCharacter))
   }
 
   useEffect(() => {
@@ -66,6 +74,9 @@ function Home() {
                         <img src={character.image} alt="card" />
                         <h2>{character.name}</h2>
                     </Link>
+                    <ul>
+                      <li onClick={() => handleOnFavourite(character)}><i className="fas fa-heart fa-lg"></i></li>
+                    </ul>
                     </div>
                   </div>
             </Col>
@@ -79,4 +90,4 @@ function Home() {
 }
 
 
-export default Home;
+export default connect()(Home);

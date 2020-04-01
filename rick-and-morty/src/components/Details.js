@@ -10,6 +10,7 @@ function Details({ match }) {
 
   //route
   function handleClick (id) {
+    console.log(id)
     history.push(`/details/${id}`)
   }
 

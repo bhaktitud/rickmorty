@@ -7,21 +7,17 @@ export default function useFetchDetails(url) {
     const arrayPromises = []
   
     useEffect(() => {
-        // console.log('masuk use effect 1')
         axios({
             method: 'GET',
             url: url
         })
             .then(({ data }) => {
                 setCharacterProfile(data)
-                console.log(data.location)
                 if(data.location.url !== ""){
                   return Promise.all([axios.get(data.location.url)])
-                  // return axios.get(data.location.url)
                 }
             })
             .then(( [data] ) => {
-              console.log(data)
               const { residents } = data.data
               residents.forEach(element => {
                   arrayPromises.push(axios.get(element))          
@@ -34,7 +30,7 @@ export default function useFetchDetails(url) {
             .catch((err) => {
                 console.log(err, 'malah error')
             });
-      }, [])
+      }, [url])
 
       return { characterProfile, mutualChars }
 }
