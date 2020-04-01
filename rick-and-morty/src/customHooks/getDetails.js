@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function useFetchDetails(url) {
-    const [ characterProfile, setCharacterProfile ] = useState({location: {}, origin: {}})
+    const [ characterProfile, setCharacterProfile ] = useState({ location: {}, origin: {} })
     const [ mutualChars, setMutualChars ] = useState([])
+    const arrayPromises = []
   
     useEffect(() => {
-        console.log('masuk use effect 1')
+        // console.log('masuk use effect 1')
         axios({
             method: 'GET',
             url: url
@@ -21,21 +22,20 @@ export default function useFetchDetails(url) {
             })
             .then(([ data ]) => {
               const { residents } = data.data
-              const arrayPromises = []
-              console.log(residents, 'dari promise all')
+              // console.log(residents, 'dari promise all')
               residents.forEach(element => {
                   arrayPromises.push(axios.get(element))          
               });
               return Promise.all(arrayPromises)
             })
             .then(( data ) => {
-              console.log(data, 'dari then ke 2')
+              // console.log(data, 'dari then ke 2')
               setMutualChars(data)
             })
             .catch((err) => {
                 console.log(err, 'malah error')
             });
-      }, [url])
+      }, [url, arrayPromises])
 
       return { characterProfile, mutualChars }
 }
