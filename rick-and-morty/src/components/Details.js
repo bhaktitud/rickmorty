@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch , useSelector } from 'react-redux';
-import { FETCH_DETAIL } from '../actions';
+import { FETCH_DETAIL, addFavourite } from '../store/actions';
 
 function Details({ match }) {
   const history = useHistory();
@@ -13,16 +13,38 @@ function Details({ match }) {
 
   useEffect(() => {
     dispatch(FETCH_DETAIL(url))
-  }, [url])
+  }, [url, dispatch])
 
+  const loading = useSelector(state => state.isLoading)
+  const error = useSelector(state => state.isError)
   const characterDetail = useSelector(state => state.characterDetail)
   const residentsList = useSelector(state => state.residentsList)
-  console.log(characterDetail, 'detail komponen')
   
   //route
   function handleClick (id) {
-    console.log(id)
     history.push(`/details/${id}`)
+  }
+
+  function handleOnFavourite(favCharacter) {
+    dispatch(addFavourite(favCharacter))
+  }
+
+  if (loading) {
+    return <lottie-player
+            src="https://assets4.lottiefiles.com/packages/lf20_qFttfS.json"
+            className="lottie01"
+            background="transparent"
+            speed = "1"
+            loop
+            style = {{width: "50em", margin: "0 0 0 27%"}}
+            autoplay >
+          </lottie-player>
+  }
+
+  if(error) {
+    return (
+      <img src="error.svg" alt="error"><p>Error...</p></img>
+    )
   }
 
   return (
@@ -32,12 +54,16 @@ function Details({ match }) {
           <img className="character-profile-img" src={characterDetail.image} alt="character"></img>
         </div>
         <div className="details-content-left">
-          <h3 className="character-profile-name-text"> {characterDetail.name} </h3>
+          <div className="name-and-fav">
+            <h3 className="character-profile-name-text"> {characterDetail.name} </h3>
+            <button className="btn btn-primary fav-btn-detail" onClick={() => handleOnFavourite(characterDetail)}> <i className="fas fa-star"></i></button>
+          </div>
           <ul className="detail-list">
             <li className="parallelogram"> <p> <strong> Status : {characterDetail.status} </strong> </p> </li>
             <li className="parallelogram"> <p> <strong> Gender : {characterDetail.gender} </strong> </p> </li>
             <li className="parallelogram"> <p> <strong> Species : {characterDetail.species} </strong> </p> </li>
           </ul>
+          
         </div>
         </div>
         <div className="mutual-container">

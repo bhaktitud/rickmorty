@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { addFavourite } from '../actions';
-import { connect } from 'react-redux';
+import { addFavourite } from '../store/actions';
 
 import FavouriteList from '../components/FavouriteList'
 
 import { useDispatch , useSelector } from 'react-redux';
-import { FETCH_CHARACTERS } from '../actions';
+import { FETCH_CHARACTERS } from '../store/actions';
 
 function Home() {
 
@@ -18,8 +17,10 @@ function Home() {
 
   useEffect(() => {
     dispatch(FETCH_CHARACTERS('https://rickandmortyapi.com/api/character/'))
-  }, []);
+  }, [dispatch]);
 
+  const loading = useSelector(state => state.isLoading)
+  const error = useSelector(state => state.isError)
   const fetchResult = useSelector(state => state.charactersList)
 
   const handleOnChange = event => {
@@ -37,6 +38,25 @@ function Home() {
     )
     setFiltered(results)
   }, [fetchResult, name]);
+
+
+  if (loading) {
+    return <lottie-player
+            src="https://assets4.lottiefiles.com/packages/lf20_qFttfS.json"
+            className="lottie01"
+            background="transparent"
+            speed = "1"
+            loop
+            style = {{width: "50em", margin: "0 0 0 27%"}}
+            autoplay >
+          </lottie-player>
+  }
+
+  if(error) {
+    return (
+      <img src="error.svg" alt="error"><p>Error...</p></img>
+    )
+  } 
 
   return (
     <>
@@ -77,4 +97,4 @@ function Home() {
 }
 
 
-export default connect()(Home);
+export default Home;

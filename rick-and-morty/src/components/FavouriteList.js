@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 function FavouriteList () {
 
     const favouriteChars = useSelector(state => state.favouriteCharacter)
-    console.log(favouriteChars, 'favourite')
     return (
         <>
         <div className="favourite-container">
@@ -14,7 +13,7 @@ function FavouriteList () {
                 <p className="character-profile-name-text size-favourite-text">Favourite List</p>
             </div>
             <div className="fav-img-container">
-                { favouriteChars.map((character) => (
+                {favouriteChars.map((character) => (
                     <img className="fav-img" key={character.id} src={character.image} alt="favourite"></img>
                 ))}
             </div>

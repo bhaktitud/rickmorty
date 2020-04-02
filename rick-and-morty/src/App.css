@@ -173,6 +173,35 @@ p:hover {
   /* opacity: .85; */
 }
 
+.fav-btn-detail {
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.name-and-fav {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 90%;
+  
+}
+
+.footer-container {
+    display: flex;
+    bottom: 0;
+    z-index: 1;
+    background-color: #0087ff;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 1em;
+    position: fixed;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* opacity: .85; */
+}
+
 .custom-minitopbar {
   z-index: 2;
   display: flex;
@@ -224,6 +253,7 @@ p:hover {
 .fav-img:hover {
   transform: scale(1.05);
 }
+
 
 .fav-icon {
   width: 15vw;

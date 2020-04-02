@@ -15,7 +15,7 @@ function NavTopBar() {
     <>
       <nav className="border border-secondary fixed navtopbar">
         <div className="nav-brand">
-          <h3 className="character-profile-name-text">Rick And Morty World</h3>
+          <h3 className="character-profile-name-text" onClick={handleClick}>Rick And Morty World</h3>
         </div>
       </nav>
     </>

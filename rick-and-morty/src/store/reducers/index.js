@@ -2,15 +2,19 @@ import {
         ADD_FAVOURITE, 
         SET_CHARACTER_LIST,
         SET_CHARACTER_DETAIL,
-        SET_RESIDENTS
-    } from '../actions';
+        SET_RESIDENTS,
+        SET_LOADING,
+        SET_ERROR
+} from '../actions';
 
 
 const initialState = {
     favouriteCharacter : [],
     charactersList : [],
     characterDetail : {},
-    residentsList : []
+    residentsList : [],
+    isLoading : false,
+    isError : false
 }
 
 export function reducers(state = initialState, action) {
@@ -27,7 +31,6 @@ export function reducers(state = initialState, action) {
                 charactersList : payload
             }
         case SET_CHARACTER_DETAIL:
-            console.log(payload, 'reducer')
             return {
                 ...state,
                 characterDetail : payload
@@ -36,6 +39,16 @@ export function reducers(state = initialState, action) {
             return {
                 ...state,
                 residentsList : payload
+            }
+        case SET_LOADING:
+            return {
+                ...state,
+                isLoading : payload
+            }
+        case SET_ERROR:
+            return {
+                ...state,
+                isError : payload
             }
         default:
             return state;
