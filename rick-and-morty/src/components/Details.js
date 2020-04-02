@@ -1,13 +1,24 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import useFetchDetails from '../customHooks/getDetails';
+import { useDispatch , useSelector } from 'react-redux';
+import { FETCH_DETAIL } from '../actions';
 
 function Details({ match }) {
   const history = useHistory();
-  const { characterProfile, mutualChars } = useFetchDetails(`https://rickandmortyapi.com/api/character/${match.params.id}`)
+  const dispatch = useDispatch();
+  const url = `https://rickandmortyapi.com/api/character/${match.params.id}`
 
+  useEffect(() => {
+    dispatch(FETCH_DETAIL(url))
+  }, [url])
+
+  const characterDetail = useSelector(state => state.characterDetail)
+  const residentsList = useSelector(state => state.residentsList)
+  console.log(characterDetail, 'detail komponen')
+  
   //route
   function handleClick (id) {
     console.log(id)
@@ -18,16 +29,14 @@ function Details({ match }) {
     <>
       <div className="detail-container">
         <div className="profile-img-container">
-          <img className="character-profile-img" src={characterProfile.image} alt="character"></img>
+          <img className="character-profile-img" src={characterDetail.image} alt="character"></img>
         </div>
         <div className="details-content-left">
-          <h3 className="character-profile-name-text"> {characterProfile.name} </h3>
+          <h3 className="character-profile-name-text"> {characterDetail.name} </h3>
           <ul className="detail-list">
-            <li className="parallelogram"> <p> <strong> Status : {characterProfile.status} </strong> </p> </li>
-            <li className="parallelogram"> <p> <strong> Gender : {characterProfile.gender} </strong> </p> </li>
-            <li className="parallelogram"> <p> <strong> Species : {characterProfile.species} </strong> </p> </li>
-            <li className="parallelogram"> <p> <strong> Location : {characterProfile.location.name} </strong> </p> </li>
-            <li className="parallelogram"> <p> <strong> Origin : {characterProfile.origin.name} </strong> </p> </li>
+            <li className="parallelogram"> <p> <strong> Status : {characterDetail.status} </strong> </p> </li>
+            <li className="parallelogram"> <p> <strong> Gender : {characterDetail.gender} </strong> </p> </li>
+            <li className="parallelogram"> <p> <strong> Species : {characterDetail.species} </strong> </p> </li>
           </ul>
         </div>
         </div>
@@ -36,7 +45,7 @@ function Details({ match }) {
             <h5 className="character-profile-name-text custom-font-h5">Characters Who Live in the Same Location</h5>
           </div>
           <div className="mutual-chars-container">
-            {mutualChars && mutualChars.map((char) => (
+            {residentsList && residentsList.map((char) => (
               <img key={char.data.id} className="mutual-chars-img" src={char.data.image} alt="mutual characters" onClick={() => handleClick(char.data.id)}></img>
             ))}
           </div>

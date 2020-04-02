@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import useFetcher from '../customHooks/useFetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -8,14 +7,20 @@ import { connect } from 'react-redux';
 
 import FavouriteList from '../components/FavouriteList'
 
+import { useDispatch , useSelector } from 'react-redux';
+import { FETCH_CHARACTERS } from '../actions';
 
-function Home({ dispatch }) {
+function Home() {
 
+  const dispatch = useDispatch();
   const [ name, setName ] = useState("")
   const [ filtered, setFiltered ] = useState([])
 
-  //custom hooks
-  const { characters, loading, error } = useFetcher('https://rickandmortyapi.com/api/character/')
+  useEffect(() => {
+    dispatch(FETCH_CHARACTERS('https://rickandmortyapi.com/api/character/'))
+  }, []);
+
+  const fetchResult = useSelector(state => state.charactersList)
 
   const handleOnChange = event => {
     event.preventDefault();
@@ -25,29 +30,13 @@ function Home({ dispatch }) {
   function handleOnFavourite(favCharacter) {
     dispatch(addFavourite(favCharacter))
   }
-
+  
   useEffect(() => {
-    const results = characters.filter(character => 
+    const results = fetchResult.filter(character => 
       character.name.toLowerCase().includes(name.toLowerCase())
     )
     setFiltered(results)
-  }, [characters, name]);
-
-  if (loading) {
-    return <lottie-player
-            src="https://assets4.lottiefiles.com/packages/lf20_qFttfS.json"
-            className="lottie01"
-            background="transparent"
-            speed = "1"
-            style = {
-              { width: "50px" }
-            }
-            loop
-            autoplay >
-          </lottie-player>
-  }
-
-  if(error) return <p>Error...</p>
+  }, [fetchResult, name]);
 
   return (
     <>

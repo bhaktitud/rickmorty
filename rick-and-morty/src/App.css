@@ -66,14 +66,14 @@ h1 {
   align-items: center;
   justify-content: center;
   margin-left: 25%;
-  margin-top: 10%;
+  margin-top: 3%;
   margin-bottom: 5%;
   border-radius: 20px;
-  background-color: chocolate;
+  background-color: rgb(0, 159, 255);
   background-position: center;
   background-repeat: repeat, no-repeat;
   background-size: unset;
-  /* background-image: url('https://png2.cleanpng.com/sh/0f7d8700012d42e5040eafbf2e38ed17/L0KzQYm3VME1N5NnfZH0aYP2gLBuTgJqa5wyi9N3Y3join70jCJ1gV54hdt9aD35cbTolPlwdl5red9ybImwccP7TgJqa5wyedDtLX3ygsXCTcVibGM7eqNqN0G3RrO7TsI1O2QAUKsEMUW1Q4i6WcQyQGU7TJD5bne=/kisspng-rick-sanchez-morty-smith-vacation-family-art-rick-and-morty-5ad26b1a7146b4.243398991523739418464.png'); */
+  background-image: url('https://png2.cleanpng.com/sh/0f7d8700012d42e5040eafbf2e38ed17/L0KzQYm3VME1N5NnfZH0aYP2gLBuTgJqa5wyi9N3Y3join70jCJ1gV54hdt9aD35cbTolPlwdl5red9ybImwccP7TgJqa5wyedDtLX3ygsXCTcVibGM7eqNqN0G3RrO7TsI1O2QAUKsEMUW1Q4i6WcQyQGU7TJD5bne=/kisspng-rick-sanchez-morty-smith-vacation-family-art-rick-and-morty-5ad26b1a7146b4.243398991523739418464.png');
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -135,7 +135,7 @@ p:hover {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -155,17 +155,18 @@ p:hover {
 
 
 .poster {
-  width: 25vw;
-  height: 15vh;
+  width: 10vw;
+  height: 10vh;
 }
 
 .navtopbar {
   display: flex;
   top: 0;
   z-index: 1;
-  background-color: chocolate;
+  background-color: #0087ff;
   flex-direction: row;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   position: fixed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -179,8 +180,8 @@ p:hover {
   align-items: center;
   justify-content: center;
   width: 15%;
-  margin-top: 2%;
   right: 2%;
+  margin-top: 2%;
   position: fixed;
   border-radius: 5px;
   transition: transform .5s ease;
@@ -197,8 +198,8 @@ p:hover {
     justify-content: center;
     left: 2%;
     width: 15%;
-    max-width: 15%;
     margin-top: 2%;
+    max-width: 15%;
     position: fixed;
     border-radius: 5px;
     transition: transform .5s ease;
@@ -214,7 +215,8 @@ p:hover {
 }
 
 .fav-img {
-  width: 4vw;
+  width: 3vw;
+  margin-top: 1%;
   transition: transform .5s ease;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -225,6 +227,7 @@ p:hover {
 
 .fav-icon {
   width: 15vw;
+  height: 25vh;
   padding-bottom: 0;
 }
 

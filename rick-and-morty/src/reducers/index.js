@@ -1,22 +1,43 @@
-import { combineReducers } from 'redux';
+import { 
+        ADD_FAVOURITE, 
+        SET_CHARACTER_LIST,
+        SET_CHARACTER_DETAIL,
+        SET_RESIDENTS
+    } from '../actions';
 
-import { ADD_FAVOURITE } from '../actions';
 
+const initialState = {
+    favouriteCharacter : [],
+    charactersList : [],
+    characterDetail : {},
+    residentsList : []
+}
 
-function addFav(state = [], action ) {
-    switch (action.type) {
+export function reducers(state = initialState, action) {
+    const { type, payload } = action;
+    switch (type) {
         case ADD_FAVOURITE:
-            return [
+            return {
                 ...state,
-                action.character
-            ]
-            // return state.concat(action.character)
+                favouriteCharacter : [...state.favouriteCharacter, payload]
+            }
+        case SET_CHARACTER_LIST:
+            return {
+                ...state,
+                charactersList : payload
+            }
+        case SET_CHARACTER_DETAIL:
+            console.log(payload, 'reducer')
+            return {
+                ...state,
+                characterDetail : payload
+            }
+        case SET_RESIDENTS:
+            return {
+                ...state,
+                residentsList : payload
+            }
         default:
             return state;
     }
 }
-
-
-export default combineReducers({
-    addFav
-});
